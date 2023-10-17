@@ -19,7 +19,7 @@ const students = ['Jimmy', 'Timothy', 'Jimothy']
 
 app.get('/', (req, res) => {
 
-    rollbar.info('someone got on my app')
+    rollbar.info('someone got on my app today')
     
     res.sendFile(path.join(__dirname, '/index.html'))
     
@@ -39,7 +39,7 @@ app.post('/api/students', (req, res) => {
    })
 
    try {
-        bobbios();
+        // bobbios();
        if (index === -1 && name !== '') {
            students.push(name)
            res.status(200).send(students)
