@@ -19,7 +19,7 @@ const students = ['Jimmy', 'Timothy', 'Jimothy']
 
 app.get('/', (req, res) => {
 
-    rollbar.warning('someone got on my app today')
+    rollbar.info('someone just got on my app today')
     
     res.sendFile(path.join(__dirname, '/index.html'))
     
@@ -32,7 +32,7 @@ app.get('/api/students', (req, res) => {
 app.post('/api/students', (req, res) => {
    let {name} = req.body
 
-   rollbar.info('a user is adding a new name')
+   rollbar.warning('a user is adding a new name')
 
    const index = students.findIndex(student => {
        return student === name
@@ -59,9 +59,11 @@ app.delete('/api/students/:index', (req, res) => {
     const targetIndex = +req.params.index
     
     students.splice(targetIndex, 1)
+    
+    rollbar.critical('a user has been deleted a name')
+
     res.status(200).send(students)
 
-    rollbar.critical('a user has been deleted a name')
 })
 
 const port = process.env.PORT || 5050
